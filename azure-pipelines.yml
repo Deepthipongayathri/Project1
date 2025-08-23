@@ -1,0 +1,26 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: self
+
+# Run Maven build & tests
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'BMI-Calculator/pom.xml'
+    goals: 'package'
+    mavenVersionOption: 'Default'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+
+# Publish build artifacts
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish build artifact'
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/BMI-Calculator/target'
+    artifact: 'maven-build'
+    publishLocation: 'pipeline'
+
