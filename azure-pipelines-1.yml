@@ -14,9 +14,9 @@ steps:
   inputs:
     mavenPomFile: 'BMI-Calculator/pom.xml'
     mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
+    goals: 'clean install'
+    mavenVersionOption: 'Default'
+    
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
